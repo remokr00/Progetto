@@ -29,8 +29,8 @@ public class Opera {
     private float prezzo;
 
     @Basic
-    @Column(name = "artista", nullable = false, length = 15)
-    private String artista;
+    @Column(name = "artista", nullable = false)
+    private int artista;
 
     @Basic
     @Column(name = "tipologia", length = 20)

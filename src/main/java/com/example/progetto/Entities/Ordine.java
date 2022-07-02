@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -36,7 +37,7 @@ public class Ordine {
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data", nullable = false)
-    private String data;
+    private Date data;
 
     @Basic
     @Column(name = "numero_carta", nullable = false, length = 20)
