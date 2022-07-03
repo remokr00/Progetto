@@ -15,14 +15,17 @@ public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
     @Query("SELECT a " +
             "FROM Artista a " +
             "WHERE (a.nome LIKE: nome OR :nome IS NULL) AND " +
-            " (a.cognome LIKE: cognome OR :cognome IS NULL)"
+            "      (a.cognome LIKE: cognome OR :cognome IS NULL)"
     )
     List<Artista> advancedResearch(String nome, String cognome);
 
     //query per verificare l'esistenza dell'artista
     boolean existByNomeAndCognome(String nome, String cognome);
 
-    //query per la ricerca di informazioni nella bio, tipo data di nascita o città
-    List<Artista> findByBioLike(String bio);
+    //trovo l'artista con quell'id
+    Artista findByIdArtista(Integer idArtista);
+
+    //trovo l'artista con quel codice fiscale
+    Artista findByCodiceFiscale(Integer idArtista);
 
 }
