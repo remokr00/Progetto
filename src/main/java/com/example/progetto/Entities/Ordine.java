@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 
 @Entity
 @Data
@@ -56,9 +57,8 @@ public class Ordine {
     @JoinColumn(name = "id_utente")
     private Utente acquirente;
 
-    @ManyToOne
-    @JoinColumn(name = "opera")
-    private Opera prodotto;
+    @OneToMany(mappedBy = "ordine")
+    private HashSet<Opera> prodotti = new HashSet<>();
 
 
 }
