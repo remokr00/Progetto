@@ -1,6 +1,6 @@
-package com.example.progetto.Repositories;
+package com.example.progetto.Backend.Repositories;
 
-import com.example.progetto.Entities.Artista;
+import com.example.progetto.Backend.Entities.Artista;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

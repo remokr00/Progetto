@@ -1,4 +1,4 @@
-package com.example.progetto.Entities;
+package com.example.progetto.Backend.Entities;
 
 //Implementata da Gallo Ilaria
 

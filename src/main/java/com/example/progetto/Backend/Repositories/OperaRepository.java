@@ -1,8 +1,8 @@
-package com.example.progetto.Repositories;
+package com.example.progetto.Backend.Repositories;
 
 //Implementata da Gallo Ilaria
-import com.example.progetto.Entities.Artista;
-import com.example.progetto.Entities.Opera;
+import com.example.progetto.Backend.Entities.Artista;
+import com.example.progetto.Backend.Entities.Opera;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

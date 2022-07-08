@@ -1,9 +1,8 @@
-package com.example.progetto.Entities;
+package com.example.progetto.Backend.Entities;
 
 //Implementata da Irtuso Remo
 
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;

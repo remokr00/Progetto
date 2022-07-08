@@ -1,8 +1,10 @@
-package com.example.progetto.Repositories;
+package com.example.progetto.Backend.Repositories;
 
-import com.example.progetto.Entities.Utente;
+import com.example.progetto.Backend.Entities.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 //Implementata da Irtuso Remo
@@ -22,4 +24,8 @@ public interface UtenteRepository extends JpaRepository<Utente, Integer> {
 
     //vediamo se esiste l'utente con quella mail
     boolean existsByMail(String mail);
+
+    //vediamo se esiste un utente con quest amial
+    Utente findByMailContaining(String mail);
+
 }
