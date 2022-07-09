@@ -26,6 +26,6 @@ public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
     Artista findByIdArtista(Integer idArtista);
 
     //trovo l'artista con quel codice fiscale
-    Artista findByCodiceFiscale(Integer idArtista);
+    Artista findByCodiceFiscale(String codiceFiscale);
 
 }

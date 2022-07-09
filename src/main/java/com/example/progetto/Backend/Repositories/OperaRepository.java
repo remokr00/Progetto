@@ -28,4 +28,6 @@ public interface OperaRepository extends JpaRepository<Opera, Integer> {
     //verifico se esiste l'opera
     boolean existsByCodiceOrNome(Integer codice, String nome);
 
+    //verifica se l'opera esite a seconda del codice che passiamo
+    boolean existsByCodice(Integer integer);
 }

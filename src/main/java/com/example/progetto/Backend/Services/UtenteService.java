@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+//Implementato da Gallo Ilaria
+
 @Service
 public class UtenteService {
 

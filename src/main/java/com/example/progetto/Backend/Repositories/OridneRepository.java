@@ -30,5 +30,6 @@ public interface OridneRepository extends JpaRepository<Ordine, Integer> {
     //troviamo gli ordini con un determinato codice
     Ordine findByCodice(Integer codice);
 
-
+    //verifico se l'ordine che ha il seguente  codice esiste
+    boolean existsByCodice(int codice);
 }

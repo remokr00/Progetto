@@ -1,5 +1,6 @@
 package com.example.progetto.Backend.Repositories;
 
+import com.example.progetto.Backend.Entities.Opera;
 import com.example.progetto.Backend.Entities.Utente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,5 +28,7 @@ public interface UtenteRepository extends JpaRepository<Utente, Integer> {
 
     //vediamo se esiste un utente con quest amial
     Utente findByMailContaining(String mail);
+
+
 
 }
