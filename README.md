@@ -20,4 +20,6 @@
 
 10. Testare con Postman
 
+11. Risolvere eventuali bug
+
 
