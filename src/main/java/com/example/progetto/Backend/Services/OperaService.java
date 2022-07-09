@@ -1,7 +1,7 @@
 package com.example.progetto.Backend.Services;
 
-import com.example.progetto.Backend.Eccezioni.OperaEsistenteExcepiton;
-import com.example.progetto.Backend.Eccezioni.OpereInesistenteException;
+import com.example.progetto.Backend.Support.Eccezioni.OperaEsistenteExcepiton;
+import com.example.progetto.Backend.Support.Eccezioni.OpereInesistenteException;
 import com.example.progetto.Backend.Entities.Opera;
 import com.example.progetto.Backend.Repositories.OperaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class OperaService {
     private EntityManager entityManager;
 
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<Opera> trovaTutteLeOpere() { return operaRepository.findAll(); }
+    public List<Opera> mostraTutteLeOpere() { return operaRepository.findAll(); }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Opera aggiungiOpera(Opera opera) throws OperaEsistenteExcepiton {
@@ -41,7 +41,7 @@ public class OperaService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Opera aggioraOpera(Opera opera) throws OperaEsistenteExcepiton {
+    public Opera aggiornaOpera(Opera opera) throws OperaEsistenteExcepiton {
         if(!operaRepository.existsByCodiceOrNome(opera.getCodice(), opera.getNome())){
             aggiungiOpera(opera);
         }

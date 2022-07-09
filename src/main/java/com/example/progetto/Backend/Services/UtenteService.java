@@ -1,6 +1,6 @@
 package com.example.progetto.Backend.Services;
 
-import com.example.progetto.Backend.Eccezioni.UtenteEsistenteException;
+import com.example.progetto.Backend.Support.Eccezioni.UtenteEsistenteException;
 import com.example.progetto.Backend.Entities.Utente;
 import com.example.progetto.Backend.Repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

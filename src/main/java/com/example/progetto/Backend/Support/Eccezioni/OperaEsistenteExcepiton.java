@@ -1,4 +1,4 @@
-package com.example.progetto.Backend.Eccezioni;
+package com.example.progetto.Backend.Support.Eccezioni;
 
 public class OperaEsistenteExcepiton extends Exception{
 

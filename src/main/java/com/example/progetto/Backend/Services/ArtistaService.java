@@ -1,11 +1,8 @@
 package com.example.progetto.Backend.Services;
 
-import com.example.progetto.Backend.Eccezioni.ArtistaEsistenteException;
-import com.example.progetto.Backend.Eccezioni.UtenteEsistenteException;
+import com.example.progetto.Backend.Support.Eccezioni.ArtistaEsistenteException;
 import com.example.progetto.Backend.Entities.Artista;
-import com.example.progetto.Backend.Entities.Utente;
 import com.example.progetto.Backend.Repositories.ArtistaRepository;
-import com.example.progetto.Backend.Repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -26,7 +23,7 @@ public class ArtistaService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    //restituisco un uartista con quel codice fiscale
+    //restituisco un artista con quel codice fiscale
     @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
     public Artista getArtista(String codiceFiscale){
         return artistaRepository.findByCodiceFiscale(codiceFiscale);

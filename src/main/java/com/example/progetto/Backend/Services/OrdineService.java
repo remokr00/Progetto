@@ -1,15 +1,13 @@
 package com.example.progetto.Backend.Services;
 
-import com.example.progetto.Backend.Eccezioni.OrdineEsistenteException;
-import com.example.progetto.Backend.Eccezioni.OrdineInesistenteException;
-import com.example.progetto.Backend.Eccezioni.UtenteInesistenteExcepiton;
+import com.example.progetto.Backend.Support.Eccezioni.OrdineEsistenteException;
+import com.example.progetto.Backend.Support.Eccezioni.OrdineInesistenteException;
+import com.example.progetto.Backend.Support.Eccezioni.UtenteInesistenteExcepiton;
 import com.example.progetto.Backend.Entities.Ordine;
 import com.example.progetto.Backend.Entities.Utente;
-import com.example.progetto.Backend.Repositories.OperaRepository;
 import com.example.progetto.Backend.Repositories.OridneRepository;
 import com.example.progetto.Backend.Repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +28,7 @@ public class OrdineService {
     private EntityManager entityManager;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Ordine creaOridne(Ordine ordine) throws OrdineEsistenteException {
+    public Ordine creaOrdine(Ordine ordine) throws OrdineEsistenteException {
         if(ordineRepository.existsByCodice(ordine.getCodice())){
             throw new OrdineEsistenteException();
         }
@@ -56,7 +54,7 @@ public class OrdineService {
     @Transactional(propagation = Propagation.REQUIRED)
     public Ordine aggiorna(Ordine ordine) throws OrdineEsistenteException {
         if(!ordineRepository.existsByCodice(ordine.getCodice())){
-            creaOridne(ordine);
+            creaOrdine(ordine);
         }
         return ordineRepository.save(ordine);
     }
