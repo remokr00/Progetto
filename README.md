@@ -10,10 +10,14 @@
 
 5. Risolvere il problema dell'avvio dell'applicazione
 
-6. Creare le configuraizoni 
+6. Creare le configuraizoni ✅
 
 7. Ricordare di de-commentare la configurazione della sicurezza una volta passati al front end 
 
-8. Creare i services
+8. Creare i services ✅
+
+9. Creare i Controller
+
+10. Testare con Postman
 
 
