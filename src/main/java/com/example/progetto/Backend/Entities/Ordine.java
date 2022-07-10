@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -14,7 +15,7 @@ import java.util.HashSet;
 public class Ordine {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codice", nullable = false)
     private int codice;
 
@@ -57,7 +58,7 @@ public class Ordine {
     private Utente acquirente;
 
     @OneToMany(mappedBy = "ordine")
-    private HashSet<Opera> prodotti = new HashSet<>();
+    private Set<Opera> prodotti;
 
 
 }

@@ -5,7 +5,7 @@ import com.example.progetto.Backend.Support.Eccezioni.OrdineInesistenteException
 import com.example.progetto.Backend.Support.Eccezioni.UtenteInesistenteExcepiton;
 import com.example.progetto.Backend.Entities.Ordine;
 import com.example.progetto.Backend.Entities.Utente;
-import com.example.progetto.Backend.Repositories.OridneRepository;
+import com.example.progetto.Backend.Repositories.OrdineRepository;
 import com.example.progetto.Backend.Repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.List;
 public class OrdineService {
 
     @Autowired
-    private OridneRepository ordineRepository;
+    private OrdineRepository ordineRepository;
     @Autowired
     private UtenteRepository utenteRepository;
 

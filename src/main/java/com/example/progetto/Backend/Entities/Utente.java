@@ -6,6 +6,7 @@ package com.example.progetto.Backend.Entities;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ import java.util.HashSet;
 public class Utente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_utente", nullable = false)
     private int idUtente;
 
@@ -43,6 +44,6 @@ public class Utente {
 
     //definisco le relazioni
     @OneToMany(mappedBy = "acquirente")
-    private HashSet<Ordine> ordini = new HashSet<>();
+    private Set<Ordine> ordini;
 
 }

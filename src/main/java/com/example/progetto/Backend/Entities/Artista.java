@@ -4,13 +4,16 @@ package com.example.progetto.Backend.Entities;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "artista", schema = "sito")
 public class Artista {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_artista", nullable = false)
     private int idArtista;
 
@@ -30,8 +33,11 @@ public class Artista {
     @Column(name = "bio", length = 500)
     private String bio;
 
-   //definizione relazioni
-    @OneToMany(mappedBy = "creatore")
-    private HashSet<Opera> opere = new HashSet<>();
+
+    //Il cascade sarebbe la propagazione delle azioni da un entity verso quelle "figlie" diciamo.
+    //Con delete ad esempio se eliminato il creatore vengono eliminate tutte le opere ecc.
+    //definizione relazioni
+    @OneToMany(mappedBy = "creatore", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+    private Set<Opera> opere;
 
 }

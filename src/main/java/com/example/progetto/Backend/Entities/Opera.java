@@ -3,16 +3,21 @@ package com.example.progetto.Backend.Entities;
 //Implementata da Gallo Ilaria
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Data
-@Table(name = "ooera", schema = "sito")
+@Getter
+@Setter
+@EqualsAndHashCode
+@Table(name = "opera", schema = "sito")
 public class Opera {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codice", nullable = false)
     private int codice;
 
@@ -43,7 +48,7 @@ public class Opera {
     private Artista creatore;
 
     @ManyToOne
-    @JoinColumn(name = "codice")
+    @JoinColumn(name = "related_ordine")
     private Ordine ordine;
 
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 @Repository
-public interface OridneRepository extends JpaRepository<Ordine, Integer> {
+public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
 
     //troviamo gli acquisti dell'utente x
     List<Ordine> findByUtente(Utente utente);
