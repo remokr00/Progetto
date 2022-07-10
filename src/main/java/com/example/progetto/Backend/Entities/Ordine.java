@@ -3,6 +3,7 @@ package com.example.progetto.Backend.Entities;
 //Implementata da Irtuso Remo
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -38,6 +39,7 @@ public class Ordine {
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data", nullable = false)
+    @CreationTimestamp
     private Date data;
 
     @Basic

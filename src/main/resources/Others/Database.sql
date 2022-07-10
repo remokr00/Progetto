@@ -2,6 +2,7 @@ DROP SCHEMA sito;
 CREATE SCHEMA sito;
 USE sito;
 
+
 -- Tabelle create da Irtuso Remo
 
 CREATE TABLE utente
@@ -27,7 +28,7 @@ CREATE TABLE opera
     prezzo      FLOAT,
     artista     INTEGER,
     tipologia   VARCHAR(20),
-    FOREIGN KEY (artista) REFERENCES artista(id_artista),
+    FOREIGN KEY (artista) REFERENCES artista(id_artista)
 
 );
 

@@ -3,9 +3,9 @@ spring:
     username: root
     password: progetto
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/?user=root
+    url: jdbc:mysql://127.0.0.1:3306/?user=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
-#Specifica per hibernate
+  #Specifica per hibernate
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
 
