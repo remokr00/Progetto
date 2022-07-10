@@ -3,6 +3,7 @@ package com.example.progetto.Backend.Services;
 import com.example.progetto.Backend.Support.Eccezioni.ArtistaEsistenteException;
 import com.example.progetto.Backend.Entities.Artista;
 import com.example.progetto.Backend.Repositories.ArtistaRepository;
+import com.example.progetto.Backend.Support.Eccezioni.ArtistaInesistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -25,13 +26,16 @@ public class ArtistaService {
 
     //restituisco un artista con quel codice fiscale
     @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
-    public Artista getArtista(String codiceFiscale){
+    public Artista getArtista(String codiceFiscale) throws ArtistaInesistenteException {
+        if(! artistaRepository.existsByCodiceFiscale()){
+            throw new ArtistaInesistenteException();
+        }
         return artistaRepository.findByCodiceFiscale(codiceFiscale);
     }
 
     //restituisco tutti gli artisti del sistema
     @Transactional(readOnly = true)
-    public List<Artista> getAllUtenti(){
+    public List<Artista> getAllArtisti(){
         return artistaRepository.findAll();
     }
 

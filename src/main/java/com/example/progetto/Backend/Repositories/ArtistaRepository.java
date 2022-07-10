@@ -28,4 +28,7 @@ public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
     //trovo l'artista con quel codice fiscale
     Artista findByCodiceFiscale(String codiceFiscale);
 
+    //verifico se l'artista con un determinato codice fiscale esiste
+    boolean existsByCodiceFiscale();
+
 }

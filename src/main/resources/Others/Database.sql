@@ -15,6 +15,7 @@ CREATE TABLE utente
     indirizzo       VARCHAR(50),
     e_mail          VARCHAR(50)
 
+
 );
 
 CREATE TABLE opera
@@ -26,7 +27,7 @@ CREATE TABLE opera
     prezzo      FLOAT,
     artista     INTEGER,
     tipologia   VARCHAR(20),
-    FOREIGN KEY (artista) REFERENCES artista(id_artista)
+    FOREIGN KEY (artista) REFERENCES artista(id_artista),
 
 );
 
