@@ -27,7 +27,7 @@ public class ArtistaService {
     //restituisco un artista con quel codice fiscale
     @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
     public Artista getArtista(String codiceFiscale) throws ArtistaInesistenteException {
-        if(! artistaRepository.existsByCodiceFiscale()){
+        if(! artistaRepository.existsByCodiceFiscale(codiceFiscale)){
             throw new ArtistaInesistenteException();
         }
         return artistaRepository.findByCodiceFiscale(codiceFiscale);

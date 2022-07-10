@@ -20,7 +20,7 @@ public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
     List<Artista> advancedResearch(String nome, String cognome);
 
     //query per verificare l'esistenza dell'artista
-    boolean existByNomeAndCognome(String nome, String cognome);
+    boolean existsByNomeAndCognome(String nome, String cognome);
 
     //trovo l'artista con quell'id
     Artista findByIdArtista(Integer idArtista);
@@ -29,6 +29,6 @@ public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
     Artista findByCodiceFiscale(String codiceFiscale);
 
     //verifico se l'artista con un determinato codice fiscale esiste
-    boolean existsByCodiceFiscale();
+    boolean existsByCodiceFiscale(String codiceFiscale);
 
 }
