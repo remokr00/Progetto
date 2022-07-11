@@ -8,18 +8,20 @@
 
 4. Risolvere il problema di MySQL ✅
 
-5. Risolvere il problema dell'avvio dell'applicazione
+5. Risolvere il problema dell'avvio dell'applicazione ✅
 
 6. Creare le configuraizoni ✅
 
-7. Ricordare di de-commentare la configurazione della sicurezza una volta passati al front end 
+7. Ricordare di de-commentare la configurazione della sicurezza una volta passati al front end  ✅
 
 8. Creare i services ✅
 
-9. Creare i Controller
+9. Creare i Controller ✅
 
 10. Testare con Postman
 
 11. Risolvere eventuali bug
+
+12. Implementare autenticazione
 
 
