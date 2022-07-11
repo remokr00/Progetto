@@ -33,7 +33,7 @@ public class OperaService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Opera> mostraTutteLeOpere() { return operaRepository.findAll(); }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Opera aggiungiOpera(Opera opera) throws OperaEsistenteExcepiton {
         if(operaRepository.existsByCodiceOrNome(opera.getCodice(), opera.getNome())){
             throw new OperaEsistenteExcepiton();
@@ -41,7 +41,7 @@ public class OperaService {
         return operaRepository.save(opera);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Opera aggiornaOpera(Opera opera) throws OpereInesistenteException {
         if(!operaRepository.existsByCodiceOrNome(opera.getCodice(), opera.getNome())){
             operaRepository.save(opera);
@@ -49,7 +49,7 @@ public class OperaService {
         return operaRepository.save(opera);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void rimuoviOpera(Integer codice) throws OpereInesistenteException {
         if(!operaRepository.existsByCodice(codice)){
             throw new OpereInesistenteException();
@@ -57,7 +57,7 @@ public class OperaService {
         operaRepository.deleteByCodice(codice);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Opera> paginazione(int numeroPagine, int grandezzaPagina, String ordinaPer){
         Pageable pageable = PageRequest.of(numeroPagine, grandezzaPagina, Sort.by(ordinaPer));
         Page<Opera> risultato = operaRepository.findAll(pageable);
@@ -69,7 +69,7 @@ public class OperaService {
         }
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Opera> ricercaAvanzata(Integer codice, String nome, Artista creatore, String tipologia, Float prezzo1, Float prezzo2){
         List<Opera> risultato = operaRepository.advancedResearch(codice, nome, creatore, tipologia, prezzo1, prezzo2);
         return risultato;

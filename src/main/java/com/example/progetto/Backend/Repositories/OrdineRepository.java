@@ -24,8 +24,8 @@ public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
             "WHERE o.data > :startDate AND o.data < :deadline AND o.utente = :utente")
     List<Ordine> findByBuyerInPeriod(Date startDate, Date deadline, Utente utente);
 
-    //troviamo gli ordini di una particolare opera
-    List<Ordine> findByOpera(Opera opera);
+    //troviamo gli ordini di una particolare opera (supponendo esistano solo pezzi unici)
+    Ordine findByOpera(Opera opera);
 
     //troviamo gli ordini con un determinato codice
     Ordine findByCodice(Integer codice);

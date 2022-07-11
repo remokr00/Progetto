@@ -5,6 +5,7 @@ import com.example.progetto.Backend.Entities.Artista;
 import com.example.progetto.Backend.Repositories.ArtistaRepository;
 import com.example.progetto.Backend.Support.Eccezioni.ArtistaInesistenteException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,7 @@ public class ArtistaService {
     }
 
     //restituisco tutti gli artisti del sistema
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Artista> getAllArtisti(){
         return artistaRepository.findAll();
     }
@@ -49,7 +50,7 @@ public class ArtistaService {
     }
 
     //ricerca avanzata
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Artista> ricercaAvanzata(String nome, String cognome){
         return artistaRepository.advancedResearch(nome, cognome);
     }
