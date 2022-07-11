@@ -48,6 +48,12 @@ public class ArtistaService {
         return artistaRepository.save(artista);
     }
 
+    //ricerca avanzata
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Artista> ricercaAvanzata(String nome, String cognome){
+        return artistaRepository.advancedResearch(nome, cognome);
+    }
+
 
 
 

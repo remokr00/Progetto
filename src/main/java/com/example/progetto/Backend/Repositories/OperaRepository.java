@@ -30,4 +30,7 @@ public interface OperaRepository extends JpaRepository<Opera, Integer> {
 
     //verifica se l'opera esite a seconda del codice che passiamo
     boolean existsByCodice(Integer integer);
+
+    void deleteByCodice(Integer codice);
+
 }

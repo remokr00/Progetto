@@ -1,5 +1,6 @@
 package com.example.progetto.Backend.Services;
 
+import com.example.progetto.Backend.Entities.Artista;
 import com.example.progetto.Backend.Support.Eccezioni.OperaEsistenteExcepiton;
 import com.example.progetto.Backend.Support.Eccezioni.OpereInesistenteException;
 import com.example.progetto.Backend.Entities.Opera;
@@ -41,21 +42,22 @@ public class OperaService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Opera aggiornaOpera(Opera opera) throws OperaEsistenteExcepiton {
+    public Opera aggiornaOpera(Opera opera) throws OpereInesistenteException {
         if(!operaRepository.existsByCodiceOrNome(opera.getCodice(), opera.getNome())){
-            aggiungiOpera(opera);
+            operaRepository.save(opera);
         }
         return operaRepository.save(opera);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void rimuoviOpera(Integer id) throws OpereInesistenteException {
-        if(!operaRepository.existsByCodice(id)){
+    public void rimuoviOpera(Integer codice) throws OpereInesistenteException {
+        if(!operaRepository.existsByCodice(codice)){
             throw new OpereInesistenteException();
         }
-        operaRepository.deleteById(id);
+        operaRepository.deleteByCodice(codice);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Opera> paginazione(int numeroPagine, int grandezzaPagina, String ordinaPer){
         Pageable pageable = PageRequest.of(numeroPagine, grandezzaPagina, Sort.by(ordinaPer));
         Page<Opera> risultato = operaRepository.findAll(pageable);
@@ -65,6 +67,12 @@ public class OperaService {
         else{
             return new LinkedList<>();
         }
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Opera> ricercaAvanzata(Integer codice, String nome, Artista creatore, String tipologia, Float prezzo1, Float prezzo2){
+        List<Opera> risultato = operaRepository.advancedResearch(codice, nome, creatore, tipologia, prezzo1, prezzo2);
+        return risultato;
     }
 
 

@@ -9,6 +9,7 @@ import com.example.progetto.Backend.Support.Messaggio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 //Impementata da Irtuso Remo
-@Controller
+@RestController
 @RequestMapping("/artista")
 public class ArtistaController {
 
@@ -32,7 +33,7 @@ public class ArtistaController {
     Delete quando lo voglio eliminare
      */
 
-    @PostMapping("/creaArtista")
+    @PostMapping("/crea_artista")
     public ResponseEntity<Artista> creaArtista(@RequestBody @Valid Artista artista) {
         try {
             Artista nuovo = artistaService.registraArtista(artista);
@@ -42,7 +43,7 @@ public class ArtistaController {
         }
     }
 
-    @GetMapping("/cercaArtista")
+    @GetMapping("/cerca_artista")
     public ResponseEntity<Artista> cercaArtista(@RequestParam(value = "codiceFiscale") String codiceFiscale){
         try{
             Artista risultato = artistaService.getArtista(codiceFiscale);
@@ -52,8 +53,15 @@ public class ArtistaController {
         }
     }
 
-    @GetMapping("tuttiGliArtisti")
-    List<Artista> restituisciTutti(){
-        return artistaService.getAllArtisti();
+    @GetMapping("tutti_gli_artisti")
+    public ResponseEntity<List<Artista>> restituisciTutti(){
+        return new ResponseEntity<>(artistaService.getAllArtisti(), HttpStatus.OK);
     }
+
+    @GetMapping("/ricerca_avanzata")
+    public ResponseEntity<List<Artista>>  ricercaAvanzata(@RequestParam(value = "nome", required = false) String nome, @RequestParam(value = "cognome", required = false) String cognome){
+        List<Artista> risultato = artistaService.ricercaAvanzata(nome, cognome);
+        return new ResponseEntity<>(risultato, HttpStatus.OK);
+    }
+
 }
