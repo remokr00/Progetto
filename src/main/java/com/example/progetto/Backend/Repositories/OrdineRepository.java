@@ -21,8 +21,8 @@ public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
     //troviamo gli acquisti fatti dall'utente x in data y
     @Query("SELECT o "+
             "FROM Ordine o "+
-            "WHERE o.data > :startDate AND o.data < :deadline AND o.utente = :utente")
-    List<Ordine> findByBuyerInPeriod(Date startDate, Date deadline, Utente utente);
+            "WHERE o.data > :inizio AND o.data < :fine AND o.utente = :utente")
+    List<Ordine> findByBuyerInPeriod(Date inizio, Date fine, Utente utente);
 
     //troviamo gli ordini di una particolare opera (supponendo esistano solo pezzi unici)
     Ordine findByOpera(Opera opera);
