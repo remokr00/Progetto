@@ -3,6 +3,7 @@ package com.example.progetto.Backend.Services;
 import com.example.progetto.Backend.Support.Eccezioni.UtenteEsistenteException;
 import com.example.progetto.Backend.Entities.Utente;
 import com.example.progetto.Backend.Repositories.UtenteRepository;
+import com.example.progetto.Backend.Support.Eccezioni.UtenteInesistenteExcepiton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,6 +43,19 @@ public class UtenteService {
             throw new UtenteEsistenteException();
         }
         return utenteRepository.save(utente);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void eliminaUtente(Utente utente) throws UtenteInesistenteExcepiton{
+        if(!utenteRepository.existsByMail(utente.getMail())){
+            throw new UtenteInesistenteExcepiton();
+        }
+        utenteRepository.delete(utente);
+    }
+
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public List<Utente> ricercaAvanzata(String nome, String cognome, String codiceFiscale, String dataDiNascita, String mail){
+        return utenteRepository.advancedResearch(nome, cognome, codiceFiscale, dataDiNascita, mail);
     }
 
 }
