@@ -1,4 +1,4 @@
-package com.example.progetto.Backend.Authentication;
+package com.example.progetto.Backend.Support.Authentication;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 Classe per convertire il token personalizzata in modo da estrarre le cose più utili
  */
 public class JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken>{
-    @Value("${keycloack.resource}") //prendiamo il valore del client dal file yml in keycloack.resource
-    private String CLIENT_NAME;
+
+    private static String CLIENT_NAME="Progetto";
 
     /*
     Il metodo converter legge delle informazioni all'interno del token

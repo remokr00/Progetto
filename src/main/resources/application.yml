@@ -20,7 +20,6 @@ spring:
 
 #-------------------------------Specifica per la sicurezza e keycloack----------------------------------------------
 
-#DA RISOLVERE
   security:
     oauth2:
       resourceserver:
@@ -28,5 +27,6 @@ spring:
            issuer-uri: http://localhost:8080/realms/Progetto
            jwk-set-uri: http://localhost:8080/realms/Progetto/protocol/openid-connect/certs
 
-keycloak:
-  resource: fakestore-flutter #DA AGGIORNARE TODO
+#---------------DA AGGIORNARE------------------------
+#keycloack:
+  #resource: fakestore-flutter

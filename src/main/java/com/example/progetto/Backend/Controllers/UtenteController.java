@@ -8,6 +8,7 @@ import com.example.progetto.Backend.Support.Messaggio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,7 @@ public class UtenteController {
     }
 
     @DeleteMapping("/elimina_utente")
+    @PreAuthorize("hasAuthority('amministratore_progetto')")
     public ResponseEntity<Messaggio> eliminaUtente(@RequestParam(value = "utente")Utente utente){
         try{
             utenteService.eliminaUtente(utente);

@@ -12,6 +12,7 @@ import com.example.progetto.Backend.Support.Messaggio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class OrdineController {
     private OrdineService ordineService;
 
     @PostMapping("/crea_ordine")
+    @PreAuthorize("hasAuthority('utente_progetto')")
     public ResponseEntity<Ordine> creaOrdine(@RequestBody @Valid Ordine ordine){
         try {
             Ordine nuovo = ordineService.creaOrdine(ordine);
@@ -48,6 +50,7 @@ public class OrdineController {
     }
 
     @DeleteMapping("/elimina_ordine")
+    @PreAuthorize("hasAuthority('utente_progetto')")
     public ResponseEntity<Messaggio> eliminaOrdine(Ordine ordine){
         try{
             ordineService.eliminaOrdine(ordine);
@@ -58,6 +61,7 @@ public class OrdineController {
     }
 
     @PutMapping("/aggiorna_ordine")
+    @PreAuthorize("hasAuthority('utente_progetto')")
     public ResponseEntity<Ordine> modificaOrdine(@RequestBody @Valid Ordine ordine){
         try{
             Ordine aggiornato = ordineService.aggiorna(ordine);

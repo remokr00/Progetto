@@ -2,7 +2,7 @@ package com.example.progetto.Backend.Support.Configurations;//package com.exampl
 
 
 
-import com.example.progetto.Backend.Authentication.JwtAuthenticationConverter;
+import com.example.progetto.Backend.Support.Authentication.JwtAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;

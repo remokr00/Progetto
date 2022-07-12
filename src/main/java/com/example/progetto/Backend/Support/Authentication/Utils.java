@@ -1,4 +1,4 @@
-package com.example.progetto.Backend.Authentication;
+package com.example.progetto.Backend.Support.Authentication;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

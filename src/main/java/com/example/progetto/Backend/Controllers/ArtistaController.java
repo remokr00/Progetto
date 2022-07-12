@@ -34,6 +34,7 @@ public class ArtistaController {
      */
 
     @PostMapping("/crea_artista")
+    @PreAuthorize("hasAuthority('amministratore_progetto')") //solo un utente che riveste il ruolo di amministratore può creare un artista
     public ResponseEntity<Artista> creaArtista(@RequestBody @Valid Artista artista) {
         try {
             Artista nuovo = artistaService.registraArtista(artista);
@@ -43,6 +44,7 @@ public class ArtistaController {
         }
     }
 
+    //i seguenti metodi invece possono essere richiamati da chiunque
     @GetMapping("/cerca_artista")
     public ResponseEntity<Artista> cercaArtista(@RequestParam(value = "codiceFiscale") String codiceFiscale){
         try{
