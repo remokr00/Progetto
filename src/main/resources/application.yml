@@ -5,18 +5,28 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/?user=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
-  #Specifica per hibernate
+  #-------------------------------Specifica per hibernate---------------------------
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
 
+#-----------------------------Specifiche per un eventuale certificato https-----------------------------------
+  server:
+    port : 8081
+    #ssl:
+    #key-store-password: password_certificate
+    #key-store-type: PKCS12 tipo di password
+    #key-store: path per prelevare il certificato
 
 
-  #Specifica per la sicurezza
+#-------------------------------Specifica per la sicurezza e keycloack----------------------------------------------
 
 #DA RISOLVERE
- # security:
-#    oauth2:
- #     resourceserver:
- #       jwt:
- #         issuer-uri: http://localhost:8080/auth
+  security:
+    oauth2:
+      resourceserver:
+         jwt:
+           issuer-uri: http://localhost:8080/realms/Progetto
+           jwk-set-uri: http://localhost:8080/realms/Progetto/protocol/openid-connect/certs
 
+keycloak:
+  resource: fakestore-flutter #DA AGGIORNARE TODO

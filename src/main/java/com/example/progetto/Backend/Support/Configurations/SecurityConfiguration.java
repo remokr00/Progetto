@@ -1,7 +1,8 @@
-//package com.example.progetto.Backend.Configurations;
+package com.example.progetto.Backend.Support.Configurations;//package com.example.progetto.Backend.Configurations;
 
-/*
-import com.example.progetto.Backend.Configurations.JwtAuthenticationConverter;
+
+
+import com.example.progetto.Backend.Authentication.JwtAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -12,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -27,10 +27,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/utente/aggiungi").permitAll()
-                //.antMatchers("/addAcquisto").permitAll()
-                //.antMatchers("/getAcquisti").permitAll()
-                .antMatchers("/prodotti/*").permitAll()
+                .antMatchers("/utente").permitAll()
+                .antMatchers("/opera").permitAll()
+                .antMatchers("/artista").permitAll()
                 .anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(authenticationConverter());
     }
 
@@ -56,4 +55,3 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 }
-*/
