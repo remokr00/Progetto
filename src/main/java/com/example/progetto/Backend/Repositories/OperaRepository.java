@@ -18,8 +18,8 @@ public interface OperaRepository extends JpaRepository<Opera, Integer> {
             "      (o.creatore = :creatore OR :creatore IS NULL) AND"+
             "      (o.tipologia LIKE :tipologia OR :tipologia IS NULL) AND"+
             "      (o.prezzo >= :prezzo1  AND o.prezzo < :prezzo2 OR (:prezzo1  IS NULL OR :prezzo2 IS NULL) ) AND " +
-            "      ( (o.prezzo <= :prezzo2 ) OR :prezzo2 IS NULL ) AND " +
-            "      ( (o.prezzo >= :prezzo1 ) OR :prezzo1 IS NULL ) "
+            "      ( (o.prezzo >= :prezzo1 ) OR :prezzo1 IS NULL ) AND " +
+            "      ( (o.prezzo <= :prezzo2 ) OR :prezzo2 IS NULL ) "
 
     )
     List<Opera> advancedResearch(Integer codice, String nome, Artista creatore, String tipologia, Float prezzo1, Float prezzo2);
@@ -32,5 +32,8 @@ public interface OperaRepository extends JpaRepository<Opera, Integer> {
     boolean existsByCodice(Integer integer);
 
     void deleteByCodice(Integer codice);
+
+    List<Opera> findByNomeContaining(String nome);
+
 
 }

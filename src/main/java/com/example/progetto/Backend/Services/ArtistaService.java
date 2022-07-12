@@ -55,6 +55,14 @@ public class ArtistaService {
         return artistaRepository.advancedResearch(nome, cognome);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void eliminaArtista(Artista artista) throws ArtistaInesistenteException {
+        if(!artistaRepository.existsById(artista.getIdArtista())){
+            throw new ArtistaInesistenteException();
+        }
+        artistaRepository.delete(artista);
+    }
+
 
 
 

@@ -3,9 +3,11 @@ package com.example.progetto.Backend.Entities;
 //Implementata da Irtuso Remo
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -43,7 +45,9 @@ public class Utente {
     private String mail;
 
     //definisco le relazioni
-    @OneToMany(mappedBy = "acquirente")
-    private Set<Ordine> ordini;
+    //inoltre se elimino un utente elimino anche i suoi ordini
+    @OneToMany(mappedBy = "acquirente", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+    @JsonIgnore
+    private List<Ordine> ordini;
 
 }

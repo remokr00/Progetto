@@ -26,12 +26,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/utente").permitAll()
-                .antMatchers("/opera").permitAll()
-                .antMatchers("/artista").permitAll()
-                .anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(authenticationConverter());
-
+                //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                //.antMatchers("/utente").permitAll()
+                //.antMatchers("/opera").permitAll()
+                //.antMatchers("/artista").permitAll()
+                //.anyRequest().authenticated().and().oauth2ResourceServer().jwt().jwtAuthenticationConverter(authenticationConverter());
+                .antMatchers("/artista/**").permitAll()
+                .antMatchers("/utente/**").permitAll()
+                .antMatchers("/opera/**").permitAll()
+                .antMatchers("/ordine/**").permitAll();
     }
 
     @Bean

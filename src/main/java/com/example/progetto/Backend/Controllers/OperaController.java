@@ -3,6 +3,7 @@ package com.example.progetto.Backend.Controllers;
 import com.example.progetto.Backend.Entities.Artista;
 import com.example.progetto.Backend.Entities.Opera;
 import com.example.progetto.Backend.Services.OperaService;
+import com.example.progetto.Backend.Support.Eccezioni.ArtistaInesistenteException;
 import com.example.progetto.Backend.Support.Eccezioni.OperaEsistenteExcepiton;
 import com.example.progetto.Backend.Support.Eccezioni.OpereInesistenteException;
 import com.example.progetto.Backend.Support.Messaggio;
@@ -32,7 +33,7 @@ public class OperaController {
 
     //metodo per creare le liste di opera però su diverse pagine
     @GetMapping("/paginate")
-    public ResponseEntity<List<Opera>> paginazione(@RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, @RequestParam(value = "sortBy", defaultValue = "id",required = false) String sortBy) {
+    public ResponseEntity<List<Opera>> paginazione(@RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize, @RequestParam(value = "sortBy", defaultValue = "codice",required = false) String sortBy) {
         List<Opera> result = operaService.paginazione(pageNumber, pageSize, sortBy);
         if ( result.size() <= 0 ) {
             return new ResponseEntity(new Messaggio("Nessun risultato!"), HttpStatus.OK);
@@ -42,19 +43,21 @@ public class OperaController {
 
 
     @PostMapping("/aggiungi_opera")
-    @PreAuthorize("hasAuthority('amministratore_progetto')")
+   // @PreAuthorize("hasAuthority('amministratore_progetto')")
     public ResponseEntity<Opera> creaOpera(@RequestBody @Valid Opera opera) {
         try {
             Opera nuovo = operaService.aggiungiOpera(opera);
             return new ResponseEntity<>(nuovo, HttpStatus.OK);
         } catch (OperaEsistenteExcepiton e) {
             return new ResponseEntity(new Messaggio("Opera già registrata!"), HttpStatus.BAD_REQUEST);
+        }catch (ArtistaInesistenteException e){
+            return new ResponseEntity(new Messaggio("Artista non registrato impossibile assegnare opera"), HttpStatus.BAD_REQUEST);
         }
 
     }
 
     @PutMapping("/modifica_opera")
-    @PreAuthorize("hasAuthority('amministratore_progetto')")
+   // @PreAuthorize("hasAuthority('amministratore_progetto')")
     public ResponseEntity<Opera> modificaOpera(@RequestBody @Valid Opera opera){
         try{
             Opera modificata = operaService.aggiornaOpera(opera);
@@ -65,7 +68,7 @@ public class OperaController {
     }
 
     @DeleteMapping("/elimina_opera")
-    @PreAuthorize("hasAuthority('amministratore_progetto')")
+   // @PreAuthorize("hasAuthority('amministratore_progetto')")
     public ResponseEntity<Messaggio> eliminaOpera(@RequestParam(value = "codice") Integer codice) {
         try{
             operaService.rimuoviOpera(codice);
@@ -76,11 +79,16 @@ public class OperaController {
     }
 
     @GetMapping("/ricerca_avanzata")
-    public ResponseEntity<List<Opera>> ricercaAvanzata(@RequestParam(value = "codice", required = false) Integer codice, @RequestParam(value = "nome",required = false) String nome, @RequestParam(value = "artista", required = false)Artista artista, @RequestParam(value = "tipologia", required = false) String tipologia, @RequestParam(value = "prezzo1") Float prezzo1, @RequestParam(value = "prezzo2", required = false) Float prezzo2){
+    public ResponseEntity<List<Opera>> ricercaAvanzata(@RequestParam(value = "codice", required = false) Integer codice, @RequestParam(value = "nome",required = false) String nome, @RequestParam(value = "artista", required = false)Artista artista, @RequestParam(value = "tipologia", required = false) String tipologia, @RequestParam(value = "prezzo1", required = false) Float prezzo1, @RequestParam(value = "prezzo2", required = false) Float prezzo2){
         List<Opera> risultato = operaService.ricercaAvanzata(codice, nome, artista, tipologia, prezzo1, prezzo2);
         return new ResponseEntity<>(risultato, HttpStatus.OK);
     }
 
+    @GetMapping("/ricerca_per_nome")
+    public ResponseEntity<List<Opera>> getByName(@RequestParam(value = "nome")String nome){
+        List<Opera> risultato = operaService.ricercaPerNome(nome);
+        return new ResponseEntity<>(risultato, HttpStatus.OK);
+    }
 
 
 

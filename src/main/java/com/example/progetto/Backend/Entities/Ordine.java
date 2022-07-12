@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -56,11 +57,11 @@ public class Ordine {
 
     //definisco le relazioni
     @ManyToOne
-    @JoinColumn(name = "id_utente")
+    @JoinColumn(name = "id_utente", nullable = false)
     private Utente acquirente;
 
     @OneToMany(mappedBy = "ordine")
-    private Set<Opera> prodotti;
+    private List<Opera> prodotti;
 
 
 }

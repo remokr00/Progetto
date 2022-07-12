@@ -26,7 +26,7 @@ public class UtenteService {
 
     //restituisco un utente che contiene l'email
     @Transactional(readOnly = true,propagation = Propagation.SUPPORTS)
-    public Utente getUtente(String mail){
+    public List<Utente> getUtente(String mail){
         return utenteRepository.findByMailContaining(mail);
     }
 

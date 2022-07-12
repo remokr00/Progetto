@@ -34,7 +34,7 @@ public class ArtistaController {
      */
 
     @PostMapping("/crea_artista")
-    @PreAuthorize("hasAuthority('amministratore_progetto')") //solo un utente che riveste il ruolo di amministratore può creare un artista
+    //@PreAuthorize("hasAuthority('amministratore_progetto')") //solo un utente che riveste il ruolo di amministratore può creare un artista
     public ResponseEntity<Artista> creaArtista(@RequestBody @Valid Artista artista) {
         try {
             Artista nuovo = artistaService.registraArtista(artista);
@@ -45,7 +45,7 @@ public class ArtistaController {
     }
 
     //i seguenti metodi invece possono essere richiamati da chiunque
-    @GetMapping("/cerca_artista")
+    @GetMapping("/cerca_artista_cf")
     public ResponseEntity<Artista> cercaArtista(@RequestParam(value = "codiceFiscale") String codiceFiscale){
         try{
             Artista risultato = artistaService.getArtista(codiceFiscale);
@@ -64,6 +64,17 @@ public class ArtistaController {
     public ResponseEntity<List<Artista>>  ricercaAvanzata(@RequestParam(value = "nome", required = false) String nome, @RequestParam(value = "cognome", required = false) String cognome){
         List<Artista> risultato = artistaService.ricercaAvanzata(nome, cognome);
         return new ResponseEntity<>(risultato, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminaArtista")
+   // @PreAuthorize("hasAuthority('amministratore_progetto')")
+    public ResponseEntity<Messaggio> eliminaArtista(@RequestBody @Valid Artista artista){
+        try{
+            artistaService.eliminaArtista(artista);
+            return new ResponseEntity<>(new Messaggio("Artista eliminato con successo"), HttpStatus.OK);
+        }catch (ArtistaInesistenteException e){
+            return new ResponseEntity<>(new Messaggio("Artista inesistente"),HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

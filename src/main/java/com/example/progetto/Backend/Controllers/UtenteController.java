@@ -23,9 +23,9 @@ public class UtenteController {
     @Autowired
     UtenteService utenteService;
 
-    @GetMapping("/ricerca_utente")
-    public ResponseEntity<Utente> ricercsUtente(@RequestParam(value = "mail") String mail){
-        Utente risultato = utenteService.getUtente(mail);
+    @GetMapping("/ricerca_utente_mail")
+    public ResponseEntity<List<Utente>> ricercsUtente(@RequestParam(value = "mail") String mail){
+        List<Utente> risultato = utenteService.getUtente(mail);
         return new ResponseEntity<>(risultato, HttpStatus.OK);
     }
 
@@ -46,8 +46,8 @@ public class UtenteController {
     }
 
     @DeleteMapping("/elimina_utente")
-    @PreAuthorize("hasAuthority('amministratore_progetto')")
-    public ResponseEntity<Messaggio> eliminaUtente(@RequestParam(value = "utente")Utente utente){
+    //@PreAuthorize("hasAuthority('amministratore_progetto')")
+    public ResponseEntity<Messaggio> eliminaUtente(@RequestBody @Valid Utente utente){
         try{
             utenteService.eliminaUtente(utente);
             return new ResponseEntity<>(new Messaggio("Utente eliminato con successo"), HttpStatus.OK);

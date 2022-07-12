@@ -2,6 +2,7 @@ package com.example.progetto.Backend.Entities;
 
 //Implementata da Gallo Ilaria
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,7 +45,7 @@ public class Opera {
     //definizione relazioni
 
     @ManyToOne
-    @JoinColumn(name = "id_artista")
+    @JoinColumn(name = "id_artista", nullable = false)
     private Artista creatore;
 
     @ManyToOne

@@ -1,7 +1,9 @@
 package com.example.progetto.Backend.Entities;
 
 //Implementata da Gallo Ilaria
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -38,6 +40,7 @@ public class Artista {
     //Con delete ad esempio se eliminato il creatore vengono eliminate tutte le opere ecc.
     //definizione relazioni
     @OneToMany(mappedBy = "creatore", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
-    private Set<Opera> opere;
+    @JsonIgnore
+    private List<Opera> opere;
 
 }

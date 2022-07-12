@@ -9,14 +9,26 @@ spring:
           jwk-set-uri: http://localhost:8080/realms/Progetto/protocol/openid-connect/certs
     #-------------------------------Specifiche per il db----------------
   datasource:
-    username: root
+    username: postgres
     password: progetto
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/?user=root&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:postgresql://localhost:5432/sito
 
-  #-------------------------------Specifica per hibernate---------------------------
+  sql:
+    init:
+      platform: postgres
+
   jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database: POSTGRESQL
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_cpntextual_creation: true
+
 
 #-----------------------------Specifiche per un eventuale certificato https-----------------------------------
 server:

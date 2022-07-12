@@ -1,6 +1,8 @@
 package com.example.progetto.Backend.Services;
 
 import com.example.progetto.Backend.Entities.Artista;
+import com.example.progetto.Backend.Repositories.ArtistaRepository;
+import com.example.progetto.Backend.Support.Eccezioni.ArtistaInesistenteException;
 import com.example.progetto.Backend.Support.Eccezioni.OperaEsistenteExcepiton;
 import com.example.progetto.Backend.Support.Eccezioni.OpereInesistenteException;
 import com.example.progetto.Backend.Entities.Opera;
@@ -27,6 +29,9 @@ public class OperaService {
     @Autowired
     private OperaRepository operaRepository;
 
+    @Autowired
+    private ArtistaRepository artistaRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -34,10 +39,13 @@ public class OperaService {
     public List<Opera> mostraTutteLeOpere() { return operaRepository.findAll(); }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Opera aggiungiOpera(Opera opera) throws OperaEsistenteExcepiton {
+    public Opera aggiungiOpera(Opera opera) throws OperaEsistenteExcepiton, ArtistaInesistenteException {
         if(operaRepository.existsByCodiceOrNome(opera.getCodice(), opera.getNome())){
             throw new OperaEsistenteExcepiton();
        }
+        if(!artistaRepository.existsByNomeAndCognome(opera.getCreatore().getNome(), opera.getCreatore().getCognome())){
+            throw new ArtistaInesistenteException();
+        }
         return operaRepository.save(opera);
     }
 
@@ -72,6 +80,12 @@ public class OperaService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Opera> ricercaAvanzata(Integer codice, String nome, Artista creatore, String tipologia, Float prezzo1, Float prezzo2){
         List<Opera> risultato = operaRepository.advancedResearch(codice, nome, creatore, tipologia, prezzo1, prezzo2);
+        return risultato;
+    }
+
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public List<Opera> ricercaPerNome(String nome){
+        List<Opera> risultato = operaRepository.findByNomeContaining(nome);
         return risultato;
     }
 

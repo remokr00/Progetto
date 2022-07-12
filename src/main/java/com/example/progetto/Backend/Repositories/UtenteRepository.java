@@ -17,7 +17,7 @@ public interface UtenteRepository extends JpaRepository<Utente, Integer> {
             "WHERE (u.nome LIKE: nome OR :nome IS NULL) AND"+
             "       (u.cognome LIKE: cognome OR :cognome IS NULL) AND"+
             "       (u.codiceFiscale LIKE: codiceFiscale OR :codiceFiscale IS NULL) AND"+
-            "       (u.dataDiNascita LIKE: dataDiNascitae OR :dataDiNascita IS NULL) AND"+
+            "       (u.dataDiNascita LIKE: dataDiNascita OR :dataDiNascita IS NULL) AND"+
             "       (u.mail LIKE: mail OR :mail IS NULL) "
 
     )
@@ -27,7 +27,7 @@ public interface UtenteRepository extends JpaRepository<Utente, Integer> {
     boolean existsByMail(String mail);
 
     //vediamo se esiste un utente con quest amial
-    Utente findByMailContaining(String mail);
+    List<Utente> findByMailContaining(String mail);
 
 
 
