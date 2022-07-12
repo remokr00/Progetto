@@ -1,4 +1,13 @@
 spring:
+  #-------------------------------Specifica per la sicurezza e keycloack----------------------------------------------
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Progetto
+          jwk-set-uri: http://localhost:8080/realms/Progetto/protocol/openid-connect/certs
+    #-------------------------------Specifiche per il db----------------
   datasource:
     username: root
     password: progetto
@@ -10,22 +19,16 @@ spring:
     database-platform: org.hibernate.dialect.MySQL5Dialect
 
 #-----------------------------Specifiche per un eventuale certificato https-----------------------------------
-  server:
-    port : 8081
+server:
+  port : 8081
     #ssl:
     #key-store-password: password_certificate
     #key-store-type: PKCS12 tipo di password
     #key-store: path per prelevare il certificato
 
 
-#-------------------------------Specifica per la sicurezza e keycloack----------------------------------------------
 
-  security:
-    oauth2:
-      resourceserver:
-         jwt:
-           issuer-uri: http://localhost:8080/realms/Progetto
-           jwk-set-uri: http://localhost:8080/realms/Progetto/protocol/openid-connect/certs
+
 
 #---------------DA AGGIORNARE------------------------
 #keycloack:
