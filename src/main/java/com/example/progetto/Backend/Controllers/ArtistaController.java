@@ -2,6 +2,7 @@ package com.example.progetto.Backend.Controllers;
 
 import com.example.progetto.Backend.Entities.Artista;
 import com.example.progetto.Backend.Services.ArtistaService;
+import com.example.progetto.Backend.Services.OperaService;
 import com.example.progetto.Backend.Support.Eccezioni.ArtistaEsistenteException;
 import com.example.progetto.Backend.Support.Eccezioni.ArtistaInesistenteException;
 import com.example.progetto.Backend.Support.Eccezioni.UtenteEsistenteException;
@@ -24,6 +25,8 @@ public class ArtistaController {
 
     @Autowired
     private ArtistaService artistaService;
+    @Autowired
+    private OperaService operaService;
 
     /*
     Per convenzione utilizzo
@@ -70,6 +73,7 @@ public class ArtistaController {
    // @PreAuthorize("hasAuthority('amministratore_progetto')")
     public ResponseEntity<Messaggio> eliminaArtista(@RequestBody @Valid Artista artista){
         try{
+            operaService.eliminaOpereDi(artista);
             artistaService.eliminaArtista(artista);
             return new ResponseEntity<>(new Messaggio("Artista eliminato con successo"), HttpStatus.OK);
         }catch (ArtistaInesistenteException e){

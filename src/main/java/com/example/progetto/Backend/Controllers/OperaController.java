@@ -41,6 +41,15 @@ public class OperaController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/create_Da")
+    public ResponseEntity<List<Opera>> createDa(@RequestBody @Valid Artista artista){
+        try{
+            List<Opera> ris = operaService.createDa(artista);
+            return new ResponseEntity<>(ris, HttpStatus.OK);
+        }catch (ArtistaInesistenteException e){
+            return new ResponseEntity(new Messaggio("Artista inesistente"), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping("/aggiungi_opera")
    // @PreAuthorize("hasAuthority('amministratore_progetto')")

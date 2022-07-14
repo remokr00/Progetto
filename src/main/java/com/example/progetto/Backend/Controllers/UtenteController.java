@@ -1,6 +1,7 @@
 package com.example.progetto.Backend.Controllers;
 
 import com.example.progetto.Backend.Entities.Utente;
+import com.example.progetto.Backend.Services.OrdineService;
 import com.example.progetto.Backend.Services.UtenteService;
 import com.example.progetto.Backend.Support.Eccezioni.UtenteEsistenteException;
 import com.example.progetto.Backend.Support.Eccezioni.UtenteInesistenteExcepiton;
@@ -22,6 +23,8 @@ public class UtenteController {
 
     @Autowired
     UtenteService utenteService;
+    @Autowired
+    OrdineService ordineService;
 
     @GetMapping("/ricerca_utente_mail")
     public ResponseEntity<List<Utente>> ricercsUtente(@RequestParam(value = "mail") String mail){
@@ -49,6 +52,8 @@ public class UtenteController {
     //@PreAuthorize("hasAuthority('amministratore_progetto')")
     public ResponseEntity<Messaggio> eliminaUtente(@RequestBody @Valid Utente utente){
         try{
+            //elimino le opere associate all'utente
+            ordineService.eliminaOrdineDi(utente);
             utenteService.eliminaUtente(utente);
             return new ResponseEntity<>(new Messaggio("Utente eliminato con successo"), HttpStatus.OK);
         }catch (UtenteInesistenteExcepiton e){

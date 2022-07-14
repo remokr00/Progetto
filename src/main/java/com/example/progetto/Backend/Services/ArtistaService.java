@@ -1,5 +1,6 @@
 package com.example.progetto.Backend.Services;
 
+import com.example.progetto.Backend.Entities.Opera;
 import com.example.progetto.Backend.Support.Eccezioni.ArtistaEsistenteException;
 import com.example.progetto.Backend.Entities.Artista;
 import com.example.progetto.Backend.Repositories.ArtistaRepository;
@@ -43,7 +44,7 @@ public class ArtistaService {
     //registro un artista
     @Transactional(propagation = Propagation.REQUIRES_NEW) //richiede una nuova transazione
     public Artista registraArtista(Artista artista) throws ArtistaEsistenteException {
-        if (artistaRepository.existsById(artista.getIdArtista())){ //verifico se l'utente è gia esistente
+        if (artistaRepository.existsByCodiceFiscale(artista.getCodiceFiscale())){ //verifico se l'utente è gia esistente
             throw new ArtistaEsistenteException();
         }
         return artistaRepository.save(artista);
@@ -62,6 +63,7 @@ public class ArtistaService {
         }
         artistaRepository.delete(artista);
     }
+
 
 
 

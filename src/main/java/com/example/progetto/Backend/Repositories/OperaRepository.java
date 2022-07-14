@@ -31,9 +31,21 @@ public interface OperaRepository extends JpaRepository<Opera, Integer> {
     //verifica se l'opera esite a seconda del codice che passiamo
     boolean existsByCodice(Integer integer);
 
+    //vediamo se esiste un opera con quel nome
+    boolean existsByNome(String nome);
+
+    //eliminiamo l'opera contenente quel codice
     void deleteByCodice(Integer codice);
 
+    //liste di opere il cui nome contiene una determinata serie di caratteri
     List<Opera> findByNomeContaining(String nome);
+
+    //troviamo le opere legate ad un determinato artista
+    List<Opera> findByCreatore(Artista artista);
+
+    //elimino le opere dell'artista x
+    void deleteByCreatore(Artista artista);
+
 
 
 }

@@ -22,9 +22,6 @@ public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
     //query per verificare l'esistenza dell'artista
     boolean existsByNomeAndCognome(String nome, String cognome);
 
-    //trovo l'artista con quell'id
-    Artista findByIdArtista(Integer idArtista);
-
     //trovo l'artista con quel codice fiscale
     Artista findByCodiceFiscale(String codiceFiscale);
 

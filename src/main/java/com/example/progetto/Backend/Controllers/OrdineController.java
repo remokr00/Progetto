@@ -4,10 +4,7 @@ import com.example.progetto.Backend.Entities.Opera;
 import com.example.progetto.Backend.Entities.Ordine;
 import com.example.progetto.Backend.Entities.Utente;
 import com.example.progetto.Backend.Services.OrdineService;
-import com.example.progetto.Backend.Support.Eccezioni.OpereInesistenteException;
-import com.example.progetto.Backend.Support.Eccezioni.OrdineEsistenteException;
-import com.example.progetto.Backend.Support.Eccezioni.OrdineInesistenteException;
-import com.example.progetto.Backend.Support.Eccezioni.UtenteInesistenteExcepiton;
+import com.example.progetto.Backend.Support.Eccezioni.*;
 import com.example.progetto.Backend.Support.Messaggio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 //implementato da Irtuso Remo
@@ -36,22 +34,26 @@ public class OrdineController {
             return new ResponseEntity<>(nuovo, HttpStatus.OK);
         }catch (OrdineEsistenteException e){
             return new ResponseEntity(new Messaggio("Ordine già presente"), HttpStatus.BAD_REQUEST);
+        }catch (OpereInesistenteException e) {
+            return new ResponseEntity(new Messaggio("Impossibile trovare l'opera che vuoi acquistare"), HttpStatus.BAD_REQUEST);
+        } catch (UtenteInesistenteExcepiton e) {
+            return new ResponseEntity(new Messaggio("Impossibile trovare l'utente"), HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/cerca_ordine_per_utente")
-    public ResponseEntity<List<Ordine>> cercaOrdineUtenete(@RequestParam(value = "utente") Utente utente){
-        try{
+    public ResponseEntity<List<Ordine>> cercaOrdineUtenete(@RequestBody @Valid Utente utente){
+       try{
             List<Ordine> risultato = ordineService.getOrdine(utente);
             return new ResponseEntity<>(risultato, HttpStatus.OK);
         }catch (UtenteInesistenteExcepiton e){
             return new ResponseEntity(new Messaggio("Utente non esistente"), HttpStatus.BAD_REQUEST);
-        }
+       }
     }
 
     @DeleteMapping("/elimina_ordine")
   //  @PreAuthorize("hasAuthority('utente_progetto')")
-    public ResponseEntity<Messaggio> eliminaOrdine(Ordine ordine){
+    public ResponseEntity<Messaggio> eliminaOrdine(@RequestBody @Valid Ordine ordine){
         try{
             ordineService.eliminaOrdine(ordine);
             return new ResponseEntity<>(new Messaggio("Ordine eliminato con successo"), HttpStatus.OK);
@@ -96,7 +98,11 @@ public class OrdineController {
         return new ResponseEntity<>(risulutato, HttpStatus.OK);
     }
 
-
+    @GetMapping("/tutti_gli_ordini")
+    public ResponseEntity<List<Ordine>> tuttiGliOrdini(){
+        List<Ordine> ris = ordineService.findAll();
+        return new ResponseEntity<>(ris, HttpStatus.OK);
+    }
 
 
 }

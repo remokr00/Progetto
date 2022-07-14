@@ -90,4 +90,21 @@ public class OperaService {
     }
 
 
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public List<Opera> createDa(Artista artista) throws ArtistaInesistenteException {
+        if(!artistaRepository.existsByCodiceFiscale(artista.getCodiceFiscale())){
+            throw new ArtistaInesistenteException();
+        }
+        return operaRepository.findByCreatore(artista);
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    public void eliminaOpereDi(Artista artista) throws ArtistaInesistenteException {
+        if(!artistaRepository.existsByCodiceFiscale(artista.getCodiceFiscale())){
+            throw new ArtistaInesistenteException();
+        }
+        operaRepository.deleteByCreatore(artista);
+    }
+
+
 }

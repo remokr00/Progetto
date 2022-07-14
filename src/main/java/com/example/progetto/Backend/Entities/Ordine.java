@@ -4,17 +4,14 @@ package com.example.progetto.Backend.Entities;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 @Entity
 @Data
 @Table(name = "ordine", schema = "sito")
 public class Ordine {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +23,15 @@ public class Ordine {
     private String utente;
 
     @Basic
-    @Column(name = "opera", nullable = false)
+    @Column(name = "opera", nullable = false, length = 50)
     private String opera;
 
     @Basic
-    @Column(name = "nome_intestatario", nullable = false, length = 50)
+    @Column(name = "nome_proprietario", nullable = false, length = 50)
     private String nome;
 
     @Basic
-    @Column(name = "cognome_intestatario", nullable = false, length = 50)
+    @Column(name = "cognome_proprietario", nullable = false, length = 50)
     private String cognome;
 
     @Basic
@@ -44,7 +41,7 @@ public class Ordine {
     private Date data;
 
     @Basic
-    @Column(name = "numero_carta", nullable = false, length = 20)
+    @Column(name = "numero_carta", nullable = false, length = 20, unique = true)
     private String carta;
 
     @Basic
@@ -52,7 +49,7 @@ public class Ordine {
     private String scadenza;
 
     @Basic
-    @Column(name = "CVV", nullable = false, length = 3)
+    @Column(name = "CVV", nullable = false, length = 3, unique = true)
     private String cvv;
 
     //definisco le relazioni

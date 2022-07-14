@@ -13,7 +13,7 @@ import java.util.List;
 public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
 
     //troviamo gli acquisti dell'utente x
-    List<Ordine> findByUtente(Utente utente);
+    List<Ordine> findByAcquirente(Utente acquirente);
 
     //troviamo gli ordini effettuati in data x
     List<Ordine> findByData(Date data);
@@ -30,6 +30,9 @@ public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
     //troviamo gli ordini con un determinato codice
     Ordine findByCodice(Integer codice);
 
-    //verifico se l'ordine che ha il seguente  codice esiste
+    //verifico se l'ordine che ha il seguente codice esiste
     boolean existsByCodice(int codice);
+
+    //elimino gli ordini associati a quell'utente
+    void deleteByAcquirente(Utente utente);
 }

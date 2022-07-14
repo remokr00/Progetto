@@ -11,9 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @Table(name = "opera", schema = "sito")
 public class Opera {
 
@@ -45,8 +43,9 @@ public class Opera {
     //definizione relazioni
 
     @ManyToOne
-    @JoinColumn(name = "id_artista", nullable = false)
+    @JoinColumn(name = "id_artista")
     private Artista creatore;
+
 
     @ManyToOne
     @JoinColumn(name = "related_ordine")

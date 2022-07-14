@@ -44,9 +44,8 @@ public class Utente {
     @Column(name = "e_mail", length = 50)
     private String mail;
 
-    //definisco le relazioni
-    //inoltre se elimino un utente elimino anche i suoi ordini
-    @OneToMany(mappedBy = "acquirente", cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+   //ogni azione eseguita sull'entità padre {utente} si ripercuote pure sulle figlie {ordini}
+    @OneToMany(mappedBy = "acquirente", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Ordine> ordini;
 

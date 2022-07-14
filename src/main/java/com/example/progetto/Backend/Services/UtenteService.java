@@ -39,7 +39,8 @@ public class UtenteService {
     //registro un utente
     @Transactional(propagation = Propagation.REQUIRES_NEW) //richiede una nuova transazione
     public Utente registraUtente(Utente utente) throws UtenteEsistenteException {
-        if (utenteRepository.existsByMail(utente.getMail())){ //verifico se l'utente è gia esistente
+        if (utenteRepository.existsByMail(utente.getMail()) || utenteRepository.existsByCodiceFiscale(utente.getCodiceFiscale()
+        )){ //verifico se l'utente è gia esistente
             throw new UtenteEsistenteException();
         }
         return utenteRepository.save(utente);
