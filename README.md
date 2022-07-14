@@ -18,10 +18,12 @@
 
 9. Creare i Controller ✅
 
-10. Testare con Postman
+10. Testare con Postman (rimane da testare ordini)
 
-11. Risolvere eventuali bug
+11. Risolvere eventuali bug (eliminazione di un creatore e dei rispettivi oggetti, vedere se si può visualizzare la paginazione, risolvere il problema degli ordini nulli, risolvere il problema di assegnazioni di ordini a utenti inesistienti ). Da verificare durante il debug se ci sono altre casisitiche
 
-12. Implementare autenticazione
+12. Implementare autenticazione ✅
+
+13. Sviluppare il front-end
 
 
